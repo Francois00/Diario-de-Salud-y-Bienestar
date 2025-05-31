@@ -93,6 +93,7 @@ public class EditarActividadActivity extends AppCompatActivity {
     }
 
     void eliminarActividad() {
+
         // Firebase
         dbRef.child(fecha).removeValue();
 
