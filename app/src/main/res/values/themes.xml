@@ -18,8 +18,9 @@
 
         <!-- Configuración de la AppBar -->
         <item name="toolbarStyle">@style/Widget.MaterialComponents.Toolbar.Primary</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">?attr/colorPrimaryDark</item>
 
-        <!-- Activar DayNight para que se adapte al sistema -->
-        <item name="android:forceDarkAllowed">true</item>
+
     </style>
 </resources>

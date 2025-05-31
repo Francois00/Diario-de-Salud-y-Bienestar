@@ -21,6 +21,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".AppPreferenciasActivity" />
+        <activity android:name=".ListaActividadesActivity" />
+        <activity android:name=".EditarActividadActivity" />
+
+
+
     </application>
 
 </manifest>

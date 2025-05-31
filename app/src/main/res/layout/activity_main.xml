@@ -1,84 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/main"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:paddingTop="?attr/actionBarSize"
+    android:fitsSystemWindows="true">
 
-    <!-- Estado de ánimo -->
+    <!-- Campo: Comida -->
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layoutMood"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="¿Cómo te sientes hoy?"
+        android:hint="@string/hint_comida"
         app:boxBackgroundMode="outline"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
+        app:endIconMode="clear_text">
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/inputMood"
+            android:id="@+id/etComida"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Horas de sueño -->
+    <!-- Campo: Ejercicio -->
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layoutSleep"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Horas de sueño"
+        android:hint="@string/hint_ejercicio"
         app:boxBackgroundMode="outline"
-        app:layout_constraintTop_toBottomOf="@id/layoutMood"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp">
-
+        app:endIconMode="clear_text">
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/inputSleep"
-            android:inputType="number"
+            android:id="@+id/etEjercicio"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Comentario -->
+    <!-- Campo: Sueño -->
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layoutNote"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Comentario del día"
+        android:hint="@string/hint_sueno"
         app:boxBackgroundMode="outline"
-        app:layout_constraintTop_toBottomOf="@id/layoutSleep"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp">
-
+        app:endIconMode="clear_text">
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/inputNote"
-            android:inputType="textMultiLine"
-            android:minLines="3"
+            android:id="@+id/etSueno"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Botón guardar -->
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnGuardar"
-        android:layout_width="wrap_content"
+    <!-- Campo: Estado de ánimo -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Guardar"
-        app:cornerRadius="12dp"
-        app:iconPadding="8dp"
-        app:layout_constraintTop_toBottomOf="@id/layoutNote"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="24dp"/>
+        android:hint="@string/hint_estado"
+        app:boxBackgroundMode="outline"
+        app:endIconMode="clear_text">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etEstado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- Botones -->
+    <Button
+        android:id="@+id/btnGuardarActividad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Guardar Actividad" />
+
+    <Button
+        android:id="@+id/btnCrearActividad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Crear Actividad" />
+
+    <Button
+        android:id="@+id/btnEditarActividad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Editar Actividad" />
+
+    <Button
+        android:id="@+id/btnBorrarActividad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Borrar Actividad" />
+
+
+    <Button
+        android:id="@+id/btnVerPrefs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_ver_prefs" />
+
+    <Button
+        android:id="@+id/btnMostrarPrefs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_mostrar_prefs" />
+
+</LinearLayout>

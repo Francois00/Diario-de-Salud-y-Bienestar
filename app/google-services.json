@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "950469055516",
+    "project_id": "diario-de-salud-y-bienestar",
+    "storage_bucket": "diario-de-salud-y-bienestar.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:950469055516:android:afd2296d2a2df57b11fbd9",
+        "android_client_info": {
+          "package_name": "com.example.diariodesaludybienestar"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBms3Mnu6bcE6-zVGGNjFzoHCP480-tjM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

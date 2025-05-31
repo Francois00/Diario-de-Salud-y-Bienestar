@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:padding="16dp"
+
+
+
+
+    android:paddingTop="?attr/actionBarSize"
+    android:fitsSystemWindows="true">
+
+    <EditText android:id="@+id/etComidaEditar" android:hint="Comida"
+        android:layout_width="match_parent" android:layout_height="wrap_content" />
+    <EditText android:id="@+id/etEjercicioEditar" android:hint="Ejercicio"
+        android:layout_width="match_parent" android:layout_height="wrap_content" />
+    <EditText android:id="@+id/etSuenoEditar" android:hint="Sueño"
+        android:layout_width="match_parent" android:layout_height="wrap_content" />
+    <EditText android:id="@+id/etEstadoEditar" android:hint="Estado de ánimo"
+        android:layout_width="match_parent" android:layout_height="wrap_content" />
+
+    <Button android:id="@+id/btnActualizar" android:text="Actualizar"
+        android:layout_width="match_parent" android:layout_height="wrap_content" />
+    <Button android:id="@+id/btnEliminar" android:text="Eliminar"
+        android:layout_width="match_parent" android:layout_height="wrap_content" />
+</LinearLayout>

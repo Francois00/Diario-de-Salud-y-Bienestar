@@ -1,3 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Diario de Salud y Bienestar</string>
+
+    <!-- Nombre de la app -->
+    <string name="app_name">Diario de Salud</string>
+
+    <!-- Etiquetas para los campos -->
+    <string name="hint_comida">Comida</string>
+    <string name="hint_ejercicio">Ejercicio</string>
+    <string name="hint_sueno">Sueño</string>
+    <string name="hint_estado">Estado de ánimo</string>
+
+    <!-- Botones -->
+    <string name="btn_guardar_sqlite">Guardar en SQLite</string>
+    <string name="btn_guardar_archivo">Guardar en Archivo</string>
+    <string name="btn_cargar_archivo">Cargar Archivo</string>
+    <string name="btn_guardar_firebase">Guardar en Firebase</string>
+    <string name="btn_ver_prefs">Ver Preferencias</string>
+    <string name="btn_mostrar_prefs">Mostrar Preferencias</string>
+
+    <!-- Toasts y mensajes -->
+    <string name="msg_guardado_sqlite">Guardado correctamente en SQLite</string>
+    <string name="msg_guardado_archivo">Guardado correctamente en archivo interno</string>
+    <string name="msg_cargado_archivo">Datos cargados desde archivo</string>
+    <string name="msg_error_archivo">No se pudo leer el archivo</string>
+    <string name="msg_guardado_firebase">Guardado en Firebase</string>
+    <string name="msg_error_firebase">Error al guardar en Firebase</string>
+
 </resources>
