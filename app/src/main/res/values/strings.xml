@@ -3,4 +3,36 @@
     <string name="prompt_genero">Selecciona tu género</string>
     <string name="prompt_estilo">Selecciona tu estilo de vida</string>
 
+
+    <string-array name="horas_sueno">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+    </string-array>
+
+    <string-array name="actividad_fisica">
+        <item>Nada</item>
+        <item>Menos de 30 min</item>
+        <item>30-60 min</item>
+        <item>Más de 1 hora</item>
+    </string-array>
+
+    <string-array name="estado_animo">
+        <item>Feliz</item>
+        <item>Triste</item>
+        <item>Estresado</item>
+        <item>Cansado</item>
+        <item>Motivado</item>
+        <item>Ansioso</item>
+    </string-array>
+
 </resources>

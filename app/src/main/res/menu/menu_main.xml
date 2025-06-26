@@ -1,10 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Opción: Ir al Perfil -->
     <item
         android:id="@+id/action_profile"
-        android:title="Mi perfil"
+        android:title="Mi Perfil"
+        android:icon="@android:drawable/ic_menu_myplaces"
         android:showAsAction="never" />
+
+    <!-- Opción: Ver Metas -->
+    <item
+        android:id="@+id/action_metas"
+        android:title="Mis Metas"
+        android:icon="@android:drawable/ic_menu_agenda"
+        android:showAsAction="never" />
+
+    <!-- Opción: Cerrar sesión -->
     <item
         android:id="@+id/action_logout"
         android:title="Cerrar sesión"
+        android:icon="@android:drawable/ic_lock_power_off"
         android:showAsAction="never" />
+
 </menu>

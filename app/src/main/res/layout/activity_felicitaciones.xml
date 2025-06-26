@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="32dp"
+    android:background="#E3F2FD">
+
+    <TextView
+        android:id="@+id/textViewFelicitaciones"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="¡Felicidades!\nHas cumplido tus metas diarias.\nSigue así por una vida más saludable."
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textColor="#1B5E20"
+        android:padding="16dp" />
+
+    <Button
+        android:id="@+id/btnCerrarApp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nos vemos mañana"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="#4CAF50"
+        android:textColor="#FFFFFF" />
+</LinearLayout>
