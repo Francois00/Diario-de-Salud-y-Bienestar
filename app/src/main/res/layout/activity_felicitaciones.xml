@@ -11,18 +11,21 @@
         android:id="@+id/textViewFelicitaciones"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="¡Felicidades!\nHas cumplido tus metas diarias.\nSigue así por una vida más saludable."
         android:textAlignment="center"
         android:textSize="20sp"
         android:textColor="#1B5E20"
-        android:padding="16dp" />
+        android:padding="16dp"
+        android:lineSpacingMultiplier="1.3"/>
 
     <Button
         android:id="@+id/btnCerrarApp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nos vemos mañana"
+        android:text="Volver al inicio"
         android:layout_marginTop="24dp"
         android:backgroundTint="#4CAF50"
-        android:textColor="#FFFFFF" />
+        android:textColor="#FFFFFF"
+        android:paddingHorizontal="24dp"
+        android:paddingVertical="12dp"/>
+
 </LinearLayout>

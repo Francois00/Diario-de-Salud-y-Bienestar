@@ -1,52 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="24dp">
+    android:background="@drawable/gradient_background"
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginBottom="16dp">
+
+
+        </RelativeLayout>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Metas del día"
+            android:text="Tus Recomendaciones Diarias"
+            android:textColor="@color/primary_dark"
+            android:textSize="24sp"
             android:textStyle="bold"
-            android:textSize="18sp"
-            android:layout_marginTop="80dp"
-            android:layout_marginBottom="8dp" />
+            android:gravity="center"
+            android:layout_marginBottom="16dp"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/tvResumenProgreso"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="8dp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/grey_light"
+                    android:layout_marginVertical="8dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Metas para hoy"
+                    android:textColor="@color/primary_color"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="8dp"/>
+
+                <LinearLayout
+                    android:id="@+id/layoutMetasDia"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/grey_light"
+                    android:layout_marginVertical="16dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Metas para tu objetivo"
+                    android:textColor="@color/primary_color"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="8dp"/>
+
+                <LinearLayout
+                    android:id="@+id/layoutMetasObjetivo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
         <LinearLayout
-            android:id="@+id/layoutMetasDia"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" />
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Metas para tu objetivo"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:layout_marginTop="32dp"
-            android:layout_marginBottom="8dp" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnGenerarNuevasMetas"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Generar Nuevas"
+                android:textAllCaps="false"
+                app:icon="@drawable/ic_refresh"
+                app:iconTint="@color/white"
+                app:backgroundTint="@color/secondary_color"
+                app:cornerRadius="8dp"
+                android:layout_marginEnd="8dp"/>
 
-        <LinearLayout
-            android:id="@+id/layoutMetasObjetivo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-
-        <Button
-            android:id="@+id/btnGuardarMetas"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Guardar metas"
-            android:textAllCaps="false"
-            android:backgroundTint="#6200EE"
-            android:textColor="#FFFFFF"
-            android:layout_marginTop="32dp" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnGuardarMetas"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Guardar Progreso"
+                android:textAllCaps="false"
+                app:icon="@drawable/ic_save"
+                app:iconTint="@color/white"
+                app:backgroundTint="@color/primary_color"
+                app:cornerRadius="8dp"/>
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>

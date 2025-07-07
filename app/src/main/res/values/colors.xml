@@ -20,4 +20,7 @@
     <color name="primary_dark">#E65100</color>
     <color name="secondary_dark">#5D4037</color>
     <color name="error_color">#D32F2F</color>
+
+
+    <color name="grey_light">#E0E0E0</color>
 </resources>

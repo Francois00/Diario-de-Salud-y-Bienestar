@@ -76,128 +76,14 @@ public class MainActivity extends AppCompatActivity {
         adapterActividad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerActividad.setAdapter(adapterActividad);
 
-        btnGuardar.setOnClickListener(v -> verificarSiYaRegistroHoy());
+
     }
 
-    private void verificarSiYaRegistroHoy() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user == null) return;
 
-        String fecha = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
 
-        FirebaseDatabase.getInstance()
-                .getReference("Usuarios")
-                .child(user.getUid())
-                .child("Diario")
-                .child(fecha)
-                .get()
-                .addOnSuccessListener(snapshot -> {
-                    if (snapshot.exists()) {
-                        Toast.makeText(this, "Ya registraste tus datos hoy. Inténtalo mañana.", Toast.LENGTH_LONG).show();
-                    } else {
-                        guardarDatos();
-                    }
-                })
-                .addOnFailureListener(e ->
-                        Toast.makeText(this, "Error al verificar entrada diaria", Toast.LENGTH_SHORT).show());
-    }
 
-    private void guardarDatos() {
-        String horas = spinnerHorasSueno.getSelectedItem().toString();
-        String actividad = spinnerActividad.getSelectedItem().toString();
 
-        int selectedId = radioEstadoAnimo.getCheckedRadioButtonId();
-        RadioButton selectedRadio = findViewById(selectedId);
-        String estado = selectedRadio != null ? selectedRadio.getText().toString() : "";
 
-        String fecha = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
-
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user == null) return;
-
-        // Guardar diario
-        FirebaseDatabase.getInstance()
-                .getReference("Usuarios")
-                .child(user.getUid())
-                .child("Diario")
-                .child(fecha)
-                .setValue(Map.of(
-                        "horasDormidas", horas,
-                        "actividadFisica", actividad,
-                        "estadoAnimo", estado
-                ))
-                .addOnSuccessListener(aVoid -> generarYGuardarMetas(horas, actividad, estado));
-    }
-
-    private void generarYGuardarMetas(String horas, String actividad, String estado) {
-        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        String fecha = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
-
-        // 1. Metas del día
-        ArrayList<String> metasDia = new ArrayList<>();
-        int h = Integer.parseInt(horas);
-        if (h < 6) metasDia.add("Dormir al menos 7 horas esta noche");
-        if (actividad.equals("Nada")) metasDia.add("Caminar 30 minutos hoy");
-        else if (actividad.equals("Menos de 30 min")) metasDia.add("Aumentar la actividad física a 30 minutos");
-
-        if (estado.equalsIgnoreCase("Estresado")) metasDia.add("Hacer respiraciones profundas 3 veces al día");
-        if (estado.equalsIgnoreCase("Cansado")) metasDia.add("Reducir uso de pantallas antes de dormir");
-        if (estado.equalsIgnoreCase("Triste")) metasDia.add("Llamar a un amigo o familiar cercano");
-        if (estado.equalsIgnoreCase("Motivado")) metasDia.add("Aprovecha y haz 10 minutos de estiramiento");
-
-        // Extras
-        metasDia.add("Beber 2 litros de agua");
-        metasDia.add("Meditar por 10 minutos");
-        metasDia.add("Tomar luz solar 15 minutos");
-        metasDia.add("Evitar pantallas 30 minutos antes de dormir");
-
-        // Guardar metas del día
-        FirebaseDatabase.getInstance()
-                .getReference("Usuarios")
-                .child(uid)
-                .child("MetasDelDia")
-                .child(fecha)
-                .setValue(metasDia);
-
-        // 2. Metas objetivo (leer perfil)
-        FirebaseDatabase.getInstance()
-                .getReference("Usuarios")
-                .child(uid)
-                .child("Perfil")
-                .get()
-                .addOnSuccessListener(snapshot -> {
-                    if (!snapshot.exists()) return;
-
-                    try {
-                        double peso = Double.parseDouble(snapshot.child("peso").getValue(String.class));
-                        double altura = Double.parseDouble(snapshot.child("altura").getValue(String.class));
-                        int edad = Integer.parseInt(snapshot.child("edad").getValue(String.class));
-                        String estilo = snapshot.child("estiloVida").getValue(String.class);
-                        String genero = snapshot.child("genero").getValue(String.class);
-                        String objetivo = snapshot.child("objetivo").getValue(String.class);
-
-                        ArrayList<String> metasObjetivo = new ArrayList<>(
-                                Recomendador.generarSugerencias(estilo, peso, altura, edad, objetivo, genero)
-                        );
-
-                        // Guardar metas objetivo
-                        FirebaseDatabase.getInstance()
-                                .getReference("Usuarios")
-                                .child(uid)
-                                .child("MetasObjetivo")
-                                .child(fecha)
-                                .setValue(metasObjetivo);
-
-                        // Ir a la pantalla de recomendaciones
-                        Intent intent = new Intent(this, RecomendacionesActivity.class);
-                        startActivity(intent);
-                        finish();
-
-                    } catch (Exception e) {
-                        Toast.makeText(this, "Error leyendo perfil", Toast.LENGTH_SHORT).show();
-                    }
-                });
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

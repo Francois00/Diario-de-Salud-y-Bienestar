@@ -3,8 +3,8 @@
     <!-- Tema principal de tu app -->
     <style name="Theme.DiarioDeBienestar" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Colores principales del tema -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/primary_color</item>
+        <item name="colorPrimaryVariant">@color/secondary_color</item>
         <item name="colorOnPrimary">@color/white</item>
 
         <item name="colorSecondary">@color/teal_200</item>
@@ -23,5 +23,7 @@
 
         <!-- Activar DayNight para que se adapte al sistema -->
     </style>
+
+
 </resources>
 

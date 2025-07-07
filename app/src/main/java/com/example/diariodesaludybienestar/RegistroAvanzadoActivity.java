@@ -45,6 +45,29 @@ public class RegistroAvanzadoActivity extends AppCompatActivity {
         setupAutocomplete();
         setupButtons();
         setupRatingBars();
+
+        // Verificar si estamos editando un registro existente
+        if (getIntent().hasExtra("fecha")) {
+            String fecha = getIntent().getStringExtra("fecha");
+            if (getSupportActionBar() != null) {
+                getSupportActionBar().setTitle("Editando registro del " + fecha);
+            }
+
+            // Cargar datos existentes
+            List<Map<String, String>> comidas = (List<Map<String, String>>) getIntent().getSerializableExtra("comidas");
+            if (comidas != null) {
+                comidasList.addAll(comidas);
+                actualizarListaComidasUI();
+            }
+
+            edtEjercicio.setText(getIntent().getStringExtra("ejercicio"));
+            edtDuracionEjercicio.setText(getIntent().getStringExtra("duracionEjercicio"));
+            edtHorasSueno.setText(getIntent().getStringExtra("horasSueno"));
+            edtMotivoEmocion.setText(getIntent().getStringExtra("motivoEmocion"));
+
+            ratingAnsiedad.setRating(getIntent().getFloatExtra("ansiedad", 0));
+            ratingEnergia.setRating(getIntent().getFloatExtra("energia", 0));
+        }
     }
 
     private void initViews() {

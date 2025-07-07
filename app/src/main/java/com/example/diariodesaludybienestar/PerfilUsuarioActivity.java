@@ -169,6 +169,30 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
                     startActivity(new Intent(this, MainActivity.class));
                     finish();
                 });
+
+        // Validar campos vacíos
+        if (edtNombre.getText().toString().trim().isEmpty() ||
+                edtEdad.getText().toString().trim().isEmpty() ||
+                edtPeso.getText().toString().trim().isEmpty() ||
+                edtAltura.getText().toString().trim().isEmpty()) {
+            Toast.makeText(this, "Completa todos los campos", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Validar formatos numéricos
+        try {
+            int edad1 = Integer.parseInt(edtEdad.getText().toString());
+            double peso1 = Double.parseDouble(edtPeso.getText().toString());
+            double altura1= Double.parseDouble(edtAltura.getText().toString());
+
+            if (edad1 <= 0 || peso1 <= 0 || altura1 <= 0) {
+                Toast.makeText(this, "Edad, peso y altura deben ser valores positivos", Toast.LENGTH_SHORT).show();
+                return;
+            }
+        } catch (NumberFormatException e) {
+            Toast.makeText(this, "Edad, peso y altura deben ser números válidos", Toast.LENGTH_SHORT).show();
+            return;
+        }
     }
 
     @Override
