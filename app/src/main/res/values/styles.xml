@@ -4,6 +4,11 @@
         <!-- Otros atributos -->
         <item name="homeAsUpIndicator">@drawable/ic_arrow_back</item>
     </style>
+    <style name="ProgressBarStyle" parent="Widget.AppCompat.ProgressBar">
+        <item name="android:layout_width">24dp</item>
+        <item name="android:layout_height">24dp</item>
+        <item name="android:indeterminateTint">@color/purple_500</item>
+    </style>
 
 
 </resources>

@@ -38,6 +38,11 @@ public class RecomendacionesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recomendaciones);
 
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+
         layoutMetasDia = findViewById(R.id.layoutMetasDia);
         layoutMetasObjetivo = findViewById(R.id.layoutMetasObjetivo);
         btnGuardar = findViewById(R.id.btnGuardarMetas);

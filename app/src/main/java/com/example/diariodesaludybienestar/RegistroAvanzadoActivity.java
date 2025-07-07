@@ -30,6 +30,11 @@ public class RegistroAvanzadoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro_avanzado);
 
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+
         nutritionAPI = new NutritionAPI(this);
         initViews();
         setupAutocomplete();
@@ -69,6 +74,7 @@ public class RegistroAvanzadoActivity extends AppCompatActivity {
             nutritionAPI.getNutritionData(alimento, new NutritionAPI.NutritionCallback() {
                 @Override
                 public void onSuccess(int calories, int protein) {
+                    showLoading(false);
                     runOnUiThread(() -> {
                         progressBar.setVisibility(View.GONE);
                         edtKcalDesayuno.setText(String.valueOf(calories));
@@ -78,6 +84,7 @@ public class RegistroAvanzadoActivity extends AppCompatActivity {
 
                 @Override
                 public void onError(String errorMessage) {
+                    showLoading(false);
                     runOnUiThread(() -> {
                         progressBar.setVisibility(View.GONE);
                         Toast.makeText(RegistroAvanzadoActivity.this,
@@ -219,6 +226,15 @@ public class RegistroAvanzadoActivity extends AppCompatActivity {
                 " (Objetivo: " + spinnerObjetivo.getSelectedItem() + ")";
     }
 
+    private void showLoading(boolean show) {
+        ProgressBar progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
+
+        // Opcional: deshabilitar los campos mientras carga
+        autoDesayuno.setEnabled(!show);
+        edtKcalDesayuno.setEnabled(!show);
+        edtProtDesayuno.setEnabled(!show);
+    }
 
 
     @Override
