@@ -1,134 +1,516 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="32dp"
+    android:background="@drawable/gradient_background"
     android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingBottom="24dp">
+        android:padding="16dp">
 
-        <!-- Nutrición -->
+        <!-- Header -->
         <TextView
-            android:text="🍎 Nutrición"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Registro Avanzado"
+            android:textColor="@color/primary_dark"
+            android:textSize="24sp"
             android:textStyle="bold"
-            android:textSize="18sp"
+            android:layout_marginBottom="16dp"
+            android:gravity="center"/>
+
+        <!-- Sección Nutrición -->
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="65dp"/>
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp">
 
-        <AutoCompleteTextView
-            android:id="@+id/autoDesayuno"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Desayuno (ej. avena)"
-            android:inputType="text"
-            android:completionThreshold="1"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="8dp">
-
-            <EditText
-                android:id="@+id/edtKcalDesayuno"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="Kcal"
-                android:inputType="numberDecimal"/>
-
-            <EditText
-                android:id="@+id/edtProtDesayuno"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginStart="8dp"
-                android:hint="Proteínas (g)"
-                android:inputType="numberDecimal"/>
-
-            <!-- ProgressBar corregido -->
-            <ProgressBar
-                android:id="@+id/progressBar"
-                style="@style/ProgressBarStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:visibility="gone"/>
-        </LinearLayout>
-
-        <!-- Mental -->
-        <TextView
-            android:text="🧠 Mental"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="8dp"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <CheckBox android:id="@+id/checkAnsiedad" android:text="Ansiedad"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-            <CheckBox android:id="@+id/checkTristeza" android:text="Tristeza"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-            <CheckBox android:id="@+id/checkIrritabilidad" android:text="Irritabilidad"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <EditText
-                android:id="@+id/edtMotivoEmocion"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:hint="¿Qué lo causó? (opcional)"
-                android:inputType="text"/>
-        </LinearLayout>
+                android:orientation="vertical"
+                android:padding="16dp">
 
-        <!-- Física -->
-        <TextView
-            android:text="💪 Física"
-            android:textStyle="bold"
-            android:textSize="18sp"
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="🍎 Nutrición"
+                    android:textColor="@color/primary_color"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="8dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.5"
+                        android:layout_marginEnd="8dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <Spinner
+                            android:id="@+id/spinnerComidaTipo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/primary_color"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.5"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/autoComidaAlimento"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Alimento"
+                            android:inputType="text"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/grey"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:layout_marginTop="8dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="8dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <EditText
+                            android:id="@+id/edtKcalComida"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Calorías"
+                            android:inputType="number"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/grey"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <EditText
+                            android:id="@+id/edtProtComida"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Proteínas (g)"
+                            android:inputType="number"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/grey"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:visibility="gone"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnAgregarComida"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Agregar Comida"
+                    android:textAllCaps="false"
+                    app:icon="@drawable/ic_add_food"
+                    app:iconTint="@color/white"
+                    app:backgroundTint="@color/secondary_color"
+                    app:cornerRadius="8dp"/>
+
+                <LinearLayout
+                    android:id="@+id/comidasContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="16dp"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Sección Estado Mental -->
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="8dp"/>
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp">
 
-        <Spinner
-            android:id="@+id/spinnerObjetivoFisico"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="🧠 Estado Mental"
+                    android:textColor="@color/primary_color"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="8dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:padding="8dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Ansiedad"
+                            android:textColor="@color/black"
+                            android:layout_marginBottom="4dp"/>
+
+                        <RatingBar
+                            android:id="@+id/ratingAnsiedad"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:numStars="5"
+                            android:stepSize="1"
+                            android:rating="0"
+                            style="@style/Widget.AppCompat.RatingBar.Small"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:padding="8dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Tristeza"
+                            android:textColor="@color/black"
+                            android:layout_marginBottom="4dp"/>
+
+                        <RatingBar
+                            android:id="@+id/ratingTristeza"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:numStars="5"
+                            android:stepSize="1"
+                            android:rating="0"
+                            style="@style/Widget.AppCompat.RatingBar.Small"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:padding="8dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Irritabilidad"
+                            android:textColor="@color/black"
+                            android:layout_marginBottom="4dp"/>
+
+                        <RatingBar
+                            android:id="@+id/ratingIrritabilidad"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:numStars="5"
+                            android:stepSize="1"
+                            android:rating="0"
+                            style="@style/Widget.AppCompat.RatingBar.Small"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:padding="8dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Energía"
+                            android:textColor="@color/black"
+                            android:layout_marginBottom="4dp"/>
+
+                        <RatingBar
+                            android:id="@+id/ratingEnergia"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:numStars="5"
+                            android:stepSize="1"
+                            android:rating="0"
+                            style="@style/Widget.AppCompat.RatingBar.Small"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:padding="8dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Felicidad"
+                            android:textColor="@color/black"
+                            android:layout_marginBottom="4dp"/>
+
+                        <RatingBar
+                            android:id="@+id/ratingFelicidad"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:numStars="5"
+                            android:stepSize="1"
+                            android:rating="0"
+                            style="@style/Widget.AppCompat.RatingBar.Small"/>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="1"/>
+                </LinearLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                    <EditText
+                        android:id="@+id/edtMotivoEmocion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Notas sobre tu estado emocional"
+                        android:inputType="textMultiLine"
+                        android:lines="3"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/grey"/>
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Sección Actividad Física -->
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:entries="@array/objetivos_fisicos"/>
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp">
 
-        <EditText
-            android:id="@+id/edtEjercicio"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="💪 Actividad Física"
+                    android:textColor="@color/primary_color"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="8dp"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                    <Spinner
+                        android:id="@+id/spinnerObjetivoFisico"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/primary_color"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="8dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <Spinner
+                            android:id="@+id/spinnerEjercicioTipo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/primary_color"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <EditText
+                            android:id="@+id/edtDuracionEjercicio"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Duración (min)"
+                            android:inputType="number"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/grey"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                    <EditText
+                        android:id="@+id/edtEjercicio"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Descripción del ejercicio"
+                        android:inputType="text"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/grey"/>
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Dentro del LinearLayout principal, después de la sección de Actividad Física -->
+        <!-- Sección Sueño -->
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:hint="Ejercicio realizado"
-            android:inputType="text"/>
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp">
 
-        <!-- Botón guardar -->
-        <Button
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="😴 Sueño"
+                    android:textColor="@color/primary_color"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="8dp"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                    <EditText
+                        android:id="@+id/edtHorasSueno"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Horas de sueño (ej. 7.5)"
+                        android:inputType="numberDecimal"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/grey"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Calidad estimada:"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="8dp"/>
+
+                <TextView
+                    android:id="@+id/tvCalidadSueno"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="No especificada"
+                    android:textColor="@color/secondary_color"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Botón Guardar -->
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnGuardarRegistro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="GUARDAR REGISTRO"
-            android:layout_marginTop="32dp"
-            android:backgroundTint="@color/purple_500"
-            android:textColor="@color/white"/>
-
+            android:layout_marginTop="8dp"
+            android:text="GUARDAR REGISTRO DIARIO"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            app:cornerRadius="24dp"
+            app:backgroundTint="@color/primary_color"
+            app:icon="@drawable/ic_save"
+            app:iconTint="@color/white"
+            app:iconGravity="textStart"
+            app:iconPadding="8dp"
+            android:paddingVertical="12dp"
+            android:elevation="4dp"/>
     </LinearLayout>
 </ScrollView>

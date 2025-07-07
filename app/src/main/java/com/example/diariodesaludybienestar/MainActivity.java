@@ -50,13 +50,7 @@ public class MainActivity extends AppCompatActivity {
         radioEstadoAnimo = findViewById(R.id.groupEstadoAnimo);
         btnGuardar = findViewById(R.id.btnGuardar);
 
-        spinnerHorasSueno.setAdapter(new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_dropdown_item,
-                getResources().getStringArray(R.array.horas_sueno)));
 
-        spinnerActividad.setAdapter(new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_dropdown_item,
-                getResources().getStringArray(R.array.actividad_fisica)));
 
         btnGuardar.setOnClickListener(v -> verificarSiYaRegistroHoy());
     }

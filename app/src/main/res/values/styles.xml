@@ -7,7 +7,12 @@
     <style name="ProgressBarStyle" parent="Widget.AppCompat.ProgressBar">
         <item name="android:layout_width">24dp</item>
         <item name="android:layout_height">24dp</item>
-        <item name="android:indeterminateTint">@color/purple_500</item>
+        <item name="android:indeterminateTint">@color/primary_color</item>
+    </style>
+    <style name="CustomRatingBar" parent="Widget.AppCompat.RatingBar">
+        <item name="android:progressDrawable">@drawable/custom_ratingbar</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:maxHeight">48dp</item>
     </style>
 
 

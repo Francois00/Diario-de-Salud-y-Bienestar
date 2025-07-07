@@ -19,28 +19,9 @@
         <item>12</item>
     </string-array>
 
-    <string-array name="actividad_fisica">
-        <item>Nada</item>
-        <item>Menos de 30 min</item>
-        <item>30-60 min</item>
-        <item>Más de 1 hora</item>
-    </string-array>
-
-    <string-array name="estado_animo">
-        <item>Feliz</item>
-        <item>Triste</item>
-        <item>Estresado</item>
-        <item>Cansado</item>
-        <item>Motivado</item>
-        <item>Ansioso</item>
-    </string-array>
+    
 
 
-    <string-array name="objetivos_fisicos">
-        <item>Perder peso</item>
-        <item>Ganar músculo</item>
-        <item>Mantenerse</item>
-    </string-array>
 
 
 </resources>

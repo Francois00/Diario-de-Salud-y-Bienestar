@@ -22,7 +22,7 @@ import java.util.Map;
 
 public class PerfilUsuarioActivity extends AppCompatActivity {
 
-    Spinner spinnerGenero, spinnerEstilo, spinnerObjetivo;
+    Spinner spinnerGenero, spinnerEstilo, spinnerObjetivo, spinnerNivel;
     EditText edtNombre, edtEdad, edtPeso, edtAltura;
     Button btnGuardar;
 
@@ -42,22 +42,59 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
         spinnerGenero = findViewById(R.id.spinnerGenero);
         spinnerEstilo = findViewById(R.id.spinnerEstilo);
         spinnerObjetivo = findViewById(R.id.spinnerObjetivo);
+        spinnerNivel = findViewById(R.id.spinnerNivel);
         btnGuardar = findViewById(R.id.btnGuardarPerfil);
 
-        spinnerGenero.setAdapter(new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_dropdown_item,
-                new String[]{"Masculino", "Femenino", "Otro"}));
-
-        spinnerEstilo.setAdapter(new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_dropdown_item,
-                new String[]{"Activo", "No activo"}));
-
-        spinnerObjetivo.setAdapter(new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_dropdown_item,
-                new String[]{"Perder peso", "Ganar músculo", "Mantenerse"}));
+        // Configuración de spinners
+        configurarSpinners();
 
         cargarDatosPerfil();
         btnGuardar.setOnClickListener(v -> guardarPerfil());
+    }
+
+    private void configurarSpinners() {
+        // Género
+        spinnerGenero.setAdapter(new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_dropdown_item,
+                new String[]{"Masculino", "Femenino", "Otro", "Prefiero no decir"}));
+
+        // Nivel de actividad (reemplaza al simple "Activo/No activo")
+        spinnerNivel.setAdapter(new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_dropdown_item,
+                new String[]{
+                        "Principiante/Sedentario",       // Poca o ninguna actividad
+                        "Moderadamente Activo",          // Ejercicio intermitente
+                        "Activo/Consolidado",            // Rutina establecida
+                        "Atleta/Avanzado",               // Entrenamiento intensivo
+                        "Con necesidades específicas"    // Embarazo, lesiones, etc.
+                }));
+
+        // Objetivos ampliados
+        spinnerObjetivo.setAdapter(new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_dropdown_item,
+                new String[]{
+                        "Perder peso",
+                        "Ganar músculo",
+                        "Mantenerse",
+                        "Reducir el Estrés",
+                        "Mejorar el Sueño",
+                        "Aumentar Energía",
+                        "Mejorar Resistencia",
+                        "Comer Más Saludable",
+                        "Mejorar Salud Cardiovascular",
+                        "Recuperación de Lesión",
+                        "Preparación para Evento",
+                        "Otro (especificar en observaciones)"
+                }));
+
+        // Estilo de vida (simplificado ya que tenemos nivel de actividad)
+        spinnerEstilo.setAdapter(new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_dropdown_item,
+                new String[]{
+                        "Urbano (mucho tiempo sentado)",
+                        "Equilibrado (mezcla de actividad y sedentarismo)",
+                        "Activo (mucho movimiento en el día)"
+                }));
     }
 
     private void cargarDatosPerfil() {
@@ -77,6 +114,7 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
                         edtAltura.setText(snapshot.child("altura").getValue(String.class));
 
                         seleccionarEnSpinner(spinnerGenero, snapshot.child("genero").getValue(String.class));
+                        seleccionarEnSpinner(spinnerNivel, snapshot.child("nivelActividad").getValue(String.class));
                         seleccionarEnSpinner(spinnerEstilo, snapshot.child("estiloVida").getValue(String.class));
                         seleccionarEnSpinner(spinnerObjetivo, snapshot.child("objetivo").getValue(String.class));
                     }
@@ -87,7 +125,9 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
         if (valor != null) {
             ArrayAdapter adapter = (ArrayAdapter) spinner.getAdapter();
             int pos = adapter.getPosition(valor);
-            spinner.setSelection(pos);
+            if (pos >= 0) {
+                spinner.setSelection(pos);
+            }
         }
     }
 
@@ -97,6 +137,7 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
         String edad = edtEdad.getText().toString().trim();
         String peso = edtPeso.getText().toString().trim();
         String altura = edtAltura.getText().toString().trim();
+        String nivelActividad = spinnerNivel.getSelectedItem().toString();
         String estilo = spinnerEstilo.getSelectedItem().toString();
         String objetivo = spinnerObjetivo.getSelectedItem().toString();
 
@@ -114,6 +155,7 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
         perfil.put("edad", edad);
         perfil.put("peso", peso);
         perfil.put("altura", altura);
+        perfil.put("nivelActividad", nivelActividad);
         perfil.put("estiloVida", estilo);
         perfil.put("objetivo", objetivo);
 
@@ -128,13 +170,12 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
                     finish();
                 });
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
-
-
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -153,13 +194,12 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
         } else if (id == R.id.action_avanzado) {
             startActivity(new Intent(this, RegistroAvanzadoActivity.class));
             return true;
-        }else if (id == R.id.action_historial) {
+        } else if (id == R.id.action_historial) {
             startActivity(new Intent(this, HistorialActivity.class));
             return true;
         }
 
         if (item.getItemId() == android.R.id.home) {
-            // Regresa a MainActivity
             Intent intent = new Intent(this, MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
@@ -169,5 +209,4 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
 }

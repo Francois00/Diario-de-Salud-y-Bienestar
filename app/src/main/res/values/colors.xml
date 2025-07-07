@@ -9,9 +9,15 @@
     <color name="black">#000000</color>
     <color name="colorTextoOscuro">#212121</color> <!-- Gris muy oscuro -->
 
+    <color name="primary_color">#FF7F50</color> <!-- Coral -->
+    <color name="secondary_color">#6B8E23</color> <!-- Olive Drab -->
 
+    <color name="grey">#9E9E9E</color>
     <!-- Colores adicionales para personalización -->
     <color name="light_blue">#03A9F4</color>
     <color name="red_text">#F44336</color>
     <color name="gray_background">#F5F5F5</color>
+    <color name="primary_dark">#E65100</color>
+    <color name="secondary_dark">#5D4037</color>
+    <color name="error_color">#D32F2F</color>
 </resources>

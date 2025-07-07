@@ -1,0 +1,46 @@
+<resources>
+    <string-array name="tipos_comida">
+        <item>Desayuno</item>
+        <item>Almuerzo</item>
+        <item>Cena</item>
+        <item>Snack mañana</item>
+        <item>Snack tarde</item>
+        <item>Postre</item>
+    </string-array>
+
+    <string-array name="alimentos_comunes">
+        <item>Avena</item>
+        <item>Huevos</item>
+        <item>Pan integral</item>
+        <item>Yogur griego</item>
+        <item>Pechuga de pollo</item>
+        <item>Salmón</item>
+        <item>Arroz integral</item>
+        <item>Quinoa</item>
+        <item>Manzana</item>
+        <item>Plátano</item>
+        <item>Almendras</item>
+    </string-array>
+
+    <string-array name="objetivos_fisicos">
+        <item>Perder peso</item>
+        <item>Ganar músculo</item>
+        <item>Mantenimiento</item>
+        <item>Mejorar flexibilidad</item>
+        <item>Mejorar resistencia</item>
+        <item>Recuperación</item>
+    </string-array>
+
+    <string-array name="tipos_ejercicio">
+        <item>Cardio</item>
+        <item>Levantamiento de pesas</item>
+        <item>Yoga</item>
+        <item>Pilates</item>
+        <item>Natación</item>
+        <item>Ciclismo</item>
+        <item>Caminata</item>
+        <item>Entrenamiento funcional</item>
+        <item>CrossFit</item>
+        <item>Baile</item>
+    </string-array>
+</resources>
