@@ -19,7 +19,14 @@
         <item>12</item>
     </string-array>
 
-    
+    <string name="metas">Metas</string>
+    <string name="metas_desc">Ir a metas diarias</string>
+    <string name="perfil">Perfil</string>
+    <string name="perfil_desc">Ir a perfil de usuario</string>
+    <string name="historial">Historial</string>
+    <string name="historial_desc">Ir a historial</string>
+    <string name="registro">Registro</string>
+    <string name="registro_desc">Ir a registro diario</string>
 
 
 
