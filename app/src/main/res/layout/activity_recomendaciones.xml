@@ -9,25 +9,44 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Contenedor de metas con margen top -->
-        <LinearLayout
-            android:id="@+id/layoutMetas"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="100dp"
-            android:layout_marginBottom="24dp">
-        </LinearLayout>
+            android:text="Metas del día"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginTop="80dp"
+            android:layout_marginBottom="8dp" />
 
-        <!-- Botón para guardar -->
+        <LinearLayout
+            android:id="@+id/layoutMetasDia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Metas para tu objetivo"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="8dp" />
+
+        <LinearLayout
+            android:id="@+id/layoutMetasObjetivo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
         <Button
             android:id="@+id/btnGuardarMetas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Guardar metas"
+            android:textAllCaps="false"
             android:backgroundTint="#6200EE"
             android:textColor="#FFFFFF"
-            android:textAllCaps="false"
-            android:layout_marginTop="16dp" />
+            android:layout_marginTop="32dp" />
     </LinearLayout>
 </ScrollView>

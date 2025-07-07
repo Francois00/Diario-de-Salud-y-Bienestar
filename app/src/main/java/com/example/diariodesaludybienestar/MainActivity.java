@@ -1,15 +1,15 @@
 package com.example.diariodesaludybienestar;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Spinner;
-import android.widget.Toast;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.content.Intent;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,11 +17,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.DataSnapshot;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
@@ -97,61 +97,88 @@ public class MainActivity extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user == null) return;
 
-        Map<String, Object> registro = new HashMap<>();
-        registro.put("horasDormidas", horas);
-        registro.put("actividadFisica", actividad);
-        registro.put("estadoAnimo", estado);
-
+        // Guardar diario
         FirebaseDatabase.getInstance()
                 .getReference("Usuarios")
                 .child(user.getUid())
                 .child("Diario")
                 .child(fecha)
-                .setValue(registro)
-                .addOnSuccessListener(aVoid -> mostrarRecomendaciones(horas, actividad, estado));
+                .setValue(Map.of(
+                        "horasDormidas", horas,
+                        "actividadFisica", actividad,
+                        "estadoAnimo", estado
+                ))
+                .addOnSuccessListener(aVoid -> generarYGuardarMetas(horas, actividad, estado));
     }
 
-    private void mostrarRecomendaciones(String horas, String actividad, String estado) {
-        ArrayList<String> metas = new ArrayList<>();
-
-        int h = Integer.parseInt(horas);
-        if (h < 6) metas.add("Dormir al menos 7 horas esta noche");
-        if (actividad.equals("Nada")) metas.add("Caminar 30 minutos hoy");
-        else if (actividad.equals("Menos de 30 min")) metas.add("Aumentar la actividad física a 30 minutos");
-
-        if (estado.equalsIgnoreCase("Estresado")) metas.add("Hacer respiraciones profundas 3 veces al día");
-        if (estado.equalsIgnoreCase("Cansado")) metas.add("Reducir uso de pantallas antes de dormir");
-        if (estado.equalsIgnoreCase("Triste")) metas.add("Llamar a un amigo o familiar cercano");
-        if (estado.equalsIgnoreCase("Motivado")) metas.add("Aprovecha y haz 10 minutos de estiramiento");
-
-        // Metas adicionales
-        metas.add("Beber 2 litros de agua");
-        metas.add("Tomarte 5 minutos de descanso cada hora");
-        metas.add("Escuchar música relajante");
-        metas.add("Evitar cafeína después de las 5pm");
-        metas.add("Meditar por 10 minutos");
-        metas.add("Tomar luz solar al menos 15 minutos");
-        metas.add("Evitar el celular 30 minutos antes de dormir");
-        metas.add("Leer 5 páginas de un libro que disfrutes");
-        metas.add("Desconectarte 1h de redes sociales");
-        metas.add("Camina por un parque o espacio verde");
-        metas.add("Anota 3 cosas buenas del día");
-
-        // Guardar metas en Firebase
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    private void generarYGuardarMetas(String horas, String actividad, String estado) {
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         String fecha = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
 
+        // 1. Metas del día
+        ArrayList<String> metasDia = new ArrayList<>();
+        int h = Integer.parseInt(horas);
+        if (h < 6) metasDia.add("Dormir al menos 7 horas esta noche");
+        if (actividad.equals("Nada")) metasDia.add("Caminar 30 minutos hoy");
+        else if (actividad.equals("Menos de 30 min")) metasDia.add("Aumentar la actividad física a 30 minutos");
+
+        if (estado.equalsIgnoreCase("Estresado")) metasDia.add("Hacer respiraciones profundas 3 veces al día");
+        if (estado.equalsIgnoreCase("Cansado")) metasDia.add("Reducir uso de pantallas antes de dormir");
+        if (estado.equalsIgnoreCase("Triste")) metasDia.add("Llamar a un amigo o familiar cercano");
+        if (estado.equalsIgnoreCase("Motivado")) metasDia.add("Aprovecha y haz 10 minutos de estiramiento");
+
+        // Extras
+        metasDia.add("Beber 2 litros de agua");
+        metasDia.add("Meditar por 10 minutos");
+        metasDia.add("Tomar luz solar 15 minutos");
+        metasDia.add("Evitar pantallas 30 minutos antes de dormir");
+
+        // Guardar metas del día
         FirebaseDatabase.getInstance()
                 .getReference("Usuarios")
-                .child(user.getUid())
-                .child("Metas")
+                .child(uid)
+                .child("MetasDelDia")
                 .child(fecha)
-                .setValue(metas);
+                .setValue(metasDia);
 
-        // Ir a la pantalla de metas
-        Intent intent = new Intent(this, RecomendacionesActivity.class);
-        intent.putStringArrayListExtra("recomendaciones", metas);
-        startActivity(intent);
+        // 2. Metas objetivo (leer perfil)
+        FirebaseDatabase.getInstance()
+                .getReference("Usuarios")
+                .child(uid)
+                .child("Perfil")
+                .get()
+                .addOnSuccessListener(snapshot -> {
+                    if (!snapshot.exists()) return;
+
+                    try {
+                        double peso = Double.parseDouble(snapshot.child("peso").getValue(String.class));
+                        double altura = Double.parseDouble(snapshot.child("altura").getValue(String.class));
+                        int edad = Integer.parseInt(snapshot.child("edad").getValue(String.class));
+                        String estilo = snapshot.child("estiloVida").getValue(String.class);
+                        String genero = snapshot.child("genero").getValue(String.class);
+                        String objetivo = snapshot.child("objetivo").getValue(String.class);
+
+                        ArrayList<String> metasObjetivo = new ArrayList<>(
+                                Recomendador.generarSugerencias(estilo, peso, altura, edad, objetivo, genero)
+                        );
+
+                        // Guardar metas objetivo
+                        FirebaseDatabase.getInstance()
+                                .getReference("Usuarios")
+                                .child(uid)
+                                .child("MetasObjetivo")
+                                .child(fecha)
+                                .setValue(metasObjetivo);
+
+                        // Ir a la pantalla de recomendaciones
+                        Intent intent = new Intent(this, RecomendacionesActivity.class);
+                        startActivity(intent);
+                        finish();
+
+                    } catch (Exception e) {
+                        Toast.makeText(this, "Error leyendo perfil", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     @Override
@@ -160,19 +187,44 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.action_logout) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_profile) {
+            startActivity(new Intent(this, PerfilUsuarioActivity.class));
+            return true;
+        } else if (id == R.id.action_metas) {
+            startActivity(new Intent(this, RecomendacionesActivity.class));
+            return true;
+        } else if (id == R.id.action_logout) {
             FirebaseAuth.getInstance().signOut();
             finish();
             return true;
-        } else if (item.getItemId() == R.id.action_profile) {
-            startActivity(new Intent(this, PerfilUsuarioActivity.class));
+        } else if (id == R.id.action_avanzado) {
+            startActivity(new Intent(this, RegistroAvanzadoActivity.class));
             return true;
-        } else if (item.getItemId() == R.id.action_metas) {
-            startActivity(new Intent(this, RecomendacionesActivity.class));
+        }else if (id == R.id.action_historial) {
+            startActivity(new Intent(this, HistorialActivity.class));
             return true;
         }
+
+        if (item.getItemId() == android.R.id.home) {
+            // Regresa a MainActivity
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
+
+
+
+
+
 }

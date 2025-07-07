@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="32dp"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="24dp">
+
+        <!-- Nutrición -->
+        <TextView
+            android:text="🍎 Nutrición"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="65dp"/>
+
+        <AutoCompleteTextView
+            android:id="@+id/autoDesayuno"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Desayuno (ej. avena)"
+            android:inputType="text"
+            android:completionThreshold="1"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <EditText
+                android:id="@+id/edtKcalDesayuno"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Kcal"
+                android:inputType="numberDecimal"/>
+
+            <EditText
+                android:id="@+id/edtProtDesayuno"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:hint="Proteínas (g)"
+                android:inputType="numberDecimal"/>
+
+            <!-- ProgressBar corregido -->
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:visibility="gone"/>
+        </LinearLayout>
+
+        <!-- Mental -->
+        <TextView
+            android:text="🧠 Mental"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="8dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <CheckBox android:id="@+id/checkAnsiedad" android:text="Ansiedad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <CheckBox android:id="@+id/checkTristeza" android:text="Tristeza"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <CheckBox android:id="@+id/checkIrritabilidad" android:text="Irritabilidad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <EditText
+                android:id="@+id/edtMotivoEmocion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="¿Qué lo causó? (opcional)"
+                android:inputType="text"/>
+        </LinearLayout>
+
+        <!-- Física -->
+        <TextView
+            android:text="💪 Física"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="8dp"/>
+
+        <Spinner
+            android:id="@+id/spinnerObjetivoFisico"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/objetivos_fisicos"/>
+
+        <EditText
+            android:id="@+id/edtEjercicio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="Ejercicio realizado"
+            android:inputType="text"/>
+
+        <!-- Botón guardar -->
+        <Button
+            android:id="@+id/btnGuardarRegistro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="GUARDAR REGISTRO"
+            android:layout_marginTop="32dp"
+            android:backgroundTint="@color/purple_500"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+</ScrollView>

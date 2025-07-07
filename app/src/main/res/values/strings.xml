@@ -35,4 +35,12 @@
         <item>Ansioso</item>
     </string-array>
 
+
+    <string-array name="objetivos_fisicos">
+        <item>Perder peso</item>
+        <item>Ganar músculo</item>
+        <item>Mantenerse</item>
+    </string-array>
+
+
 </resources>
