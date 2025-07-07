@@ -50,7 +50,31 @@ public class MainActivity extends AppCompatActivity {
         radioEstadoAnimo = findViewById(R.id.groupEstadoAnimo);
         btnGuardar = findViewById(R.id.btnGuardar);
 
+        // Populate sleep hours spinner (0-12 hours)
+        ArrayList<String> horasSueno = new ArrayList<>();
+        for (int i = 0; i <= 12; i++) {
+            horasSueno.add(String.valueOf(i));
+        }
+        ArrayAdapter<String> adapterHoras = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, horasSueno);
+        adapterHoras.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerHorasSueno.setAdapter(adapterHoras);
 
+        // Populate physical activity spinner
+        ArrayList<String> actividades = new ArrayList<>();
+        actividades.add("Nada");
+        actividades.add("10 min");
+        actividades.add("15 min");
+        actividades.add("20 min");
+        actividades.add("30 min");
+        actividades.add("45 min");
+        actividades.add("1 hora");
+        actividades.add("1:30 horas");
+        actividades.add("2 horas");
+        ArrayAdapter<String> adapterActividad = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, actividades);
+        adapterActividad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerActividad.setAdapter(adapterActividad);
 
         btnGuardar.setOnClickListener(v -> verificarSiYaRegistroHoy());
     }
@@ -181,8 +205,6 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
@@ -200,7 +222,7 @@ public class MainActivity extends AppCompatActivity {
         } else if (id == R.id.action_avanzado) {
             startActivity(new Intent(this, RegistroAvanzadoActivity.class));
             return true;
-        }else if (id == R.id.action_historial) {
+        } else if (id == R.id.action_historial) {
             startActivity(new Intent(this, HistorialActivity.class));
             return true;
         }
@@ -216,9 +238,4 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-
-
-
-
 }

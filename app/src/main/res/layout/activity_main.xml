@@ -20,12 +20,12 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="100dp" />
+            />
 
         <Spinner
             android:id="@+id/spinnerHorasSueno"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="24dp"
             app:layout_constraintTop_toBottomOf="@id/textHorasSueno"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -46,11 +46,11 @@
         <Spinner
             android:id="@+id/spinnerActividad"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="24dp"
             app:layout_constraintTop_toBottomOf="@id/textActividad"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="8dp" />
+            android:layout_marginTop="12dp" />
 
         <!-- Texto: Estado de ánimo -->
         <TextView
@@ -74,11 +74,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
-            <RadioButton android:id="@+id/rbFeliz" android:text="Feliz" />
-            <RadioButton android:id="@+id/rbCansado" android:text="Cansado" />
-            <RadioButton android:id="@+id/rbEstresado" android:text="Estresado" />
-            <RadioButton android:id="@+id/rbTriste" android:text="Triste" />
-            <RadioButton android:id="@+id/rbMotivado" android:text="Motivado"  android:layout_height="5dp"/>
+            <RadioButton android:id="@+id/rbFeliz" android:text="Feliz"  android:layout_height="match_parent" android:layout_width="match_parent"/>
+            <RadioButton android:id="@+id/rbCansado" android:text="Cansado" android:layout_height="match_parent" android:layout_width="match_parent"/>
+            <RadioButton android:id="@+id/rbEstresado" android:text="Estresado" android:layout_height="match_parent" android:layout_width="match_parent" />
+            <RadioButton android:id="@+id/rbTriste" android:text="Triste" android:layout_height="match_parent" android:layout_width="match_parent"/>
+            <RadioButton android:id="@+id/rbMotivado" android:text="Motivado"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
         </RadioGroup>
 
         <!-- Botón Guardar -->
