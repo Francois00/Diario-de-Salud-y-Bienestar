@@ -22,7 +22,7 @@ public class RegistroAvanzadoActivity extends AppCompatActivity {
     private Spinner spinnerComidaTipo;
     private AutoCompleteTextView autoComidaAlimento;
     private EditText edtKcalComida, edtProtComida, edtMotivoEmocion, edtEjercicio, edtDuracionEjercicio, edtHorasSueno;
-    private RatingBar ratingAnsiedad, ratingTristeza, ratingIrritabilidad, ratingEnergia, ratingFelicidad;
+    private Spinner spinnerAnsiedad, spinnerTristeza, spinnerIrritabilidad, spinnerEnergia, spinnerFelicidad;
     private Spinner spinnerObjetivo, spinnerEjercicioTipo;
     private Button btnGuardar, btnAgregarComida;
     private NutritionAPI nutritionAPI;
@@ -44,7 +44,7 @@ public class RegistroAvanzadoActivity extends AppCompatActivity {
         setupSpinners();
         setupAutocomplete();
         setupButtons();
-        setupRatingBars();
+
 
         // Verificar si estamos editando un registro existente
         if (getIntent().hasExtra("fecha")) {
@@ -60,13 +60,34 @@ public class RegistroAvanzadoActivity extends AppCompatActivity {
                 actualizarListaComidasUI();
             }
 
+            int ansiedad = getIntent().getIntExtra("ansiedad", 0);
+            if (ansiedad > 0) {
+                spinnerAnsiedad.setSelection(ansiedad - 1); // -1 porque los arrays empiezan en 0
+            }
+            int tristeza = getIntent().getIntExtra("tristeza", 0);
+            if (tristeza > 0) {
+                spinnerAnsiedad.setSelection(tristeza - 1); // -1 porque los arrays empiezan en 0
+            }
+            int irritabilidad = getIntent().getIntExtra("irritabilidad", 0);
+            if (irritabilidad > 0) {
+                spinnerAnsiedad.setSelection(irritabilidad - 1); // -1 porque los arrays empiezan en 0
+            }
+            int energia = getIntent().getIntExtra("energia", 0);
+            if (energia > 0) {
+                spinnerAnsiedad.setSelection(energia - 1); // -1 porque los arrays empiezan en 0
+            }
+            int felicidad = getIntent().getIntExtra("felicidad", 0);
+            if (felicidad > 0) {
+                spinnerAnsiedad.setSelection(felicidad - 1); // -1 porque los arrays empiezan en 0
+            }
+
+
             edtEjercicio.setText(getIntent().getStringExtra("ejercicio"));
             edtDuracionEjercicio.setText(getIntent().getStringExtra("duracionEjercicio"));
             edtHorasSueno.setText(getIntent().getStringExtra("horasSueno"));
             edtMotivoEmocion.setText(getIntent().getStringExtra("motivoEmocion"));
 
-            ratingAnsiedad.setRating(getIntent().getFloatExtra("ansiedad", 0));
-            ratingEnergia.setRating(getIntent().getFloatExtra("energia", 0));
+
         }
     }
 
@@ -75,11 +96,11 @@ public class RegistroAvanzadoActivity extends AppCompatActivity {
         autoComidaAlimento = findViewById(R.id.autoComidaAlimento);
         edtKcalComida = findViewById(R.id.edtKcalComida);
         edtProtComida = findViewById(R.id.edtProtComida);
-        ratingAnsiedad = findViewById(R.id.ratingAnsiedad);
-        ratingTristeza = findViewById(R.id.ratingTristeza);
-        ratingIrritabilidad = findViewById(R.id.ratingIrritabilidad);
-        ratingEnergia = findViewById(R.id.ratingEnergia);
-        ratingFelicidad = findViewById(R.id.ratingFelicidad);
+        spinnerAnsiedad = findViewById(R.id.spinnerAnsiedad);
+        spinnerTristeza = findViewById(R.id.spinnerTristeza);
+        spinnerIrritabilidad = findViewById(R.id.spinnerIrritabilidad);
+        spinnerEnergia = findViewById(R.id.spinnerEnergia);
+        spinnerFelicidad = findViewById(R.id.spinnerFelicidad);
         edtMotivoEmocion = findViewById(R.id.edtMotivoEmocion);
         spinnerObjetivo = findViewById(R.id.spinnerObjetivoFisico);
         spinnerEjercicioTipo = findViewById(R.id.spinnerEjercicioTipo);
@@ -150,31 +171,6 @@ public class RegistroAvanzadoActivity extends AppCompatActivity {
 
         spinnerEjercicioTipo.setSelection(getIndex(spinnerEjercicioTipo, ejercicioSugerido));
         edtDuracionEjercicio.setText(duracionSugerida);
-    }
-    private void setupRatingBars() {
-        // Configura el estilo de las RatingBars
-        ratingAnsiedad.setProgressDrawable(getDrawable(R.drawable.custom_ratingbar));
-        ratingTristeza.setProgressDrawable(getDrawable(R.drawable.custom_ratingbar));
-        ratingIrritabilidad.setProgressDrawable(getDrawable(R.drawable.custom_ratingbar));
-        ratingEnergia.setProgressDrawable(getDrawable(R.drawable.custom_ratingbar));
-        ratingFelicidad.setProgressDrawable(getDrawable(R.drawable.custom_ratingbar));
-
-        // Configura listeners para mostrar el valor seleccionado
-        ratingAnsiedad.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> {
-            Toast.makeText(this, "Ansiedad: " + rating, Toast.LENGTH_SHORT).show();
-        });
-        ratingTristeza.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> {
-            Toast.makeText(this, "Tristeza: " + rating, Toast.LENGTH_SHORT).show();
-        });
-        ratingIrritabilidad.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> {
-            Toast.makeText(this, "Irritabilidad: " + rating, Toast.LENGTH_SHORT).show();
-        });
-        ratingEnergia.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> {
-            Toast.makeText(this, "Energía: " + rating, Toast.LENGTH_SHORT).show();
-        });
-        ratingFelicidad.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> {
-            Toast.makeText(this, "Felicidad: " + rating, Toast.LENGTH_SHORT).show();
-        });
     }
 
     private int getIndex(Spinner spinner, String value) {
@@ -354,12 +350,13 @@ public class RegistroAvanzadoActivity extends AppCompatActivity {
 
         // Estado mental
         Map<String, Object> mental = new HashMap<>();
-        mental.put("ansiedad", ratingAnsiedad.getRating());
-        mental.put("tristeza", ratingTristeza.getRating());
-        mental.put("irritabilidad", ratingIrritabilidad.getRating());
-        mental.put("energia", ratingEnergia.getRating());
-        mental.put("felicidad", ratingFelicidad.getRating());
+        mental.put("ansiedad", spinnerAnsiedad.getSelectedItemPosition() + 1); // +1 porque empieza en 0
+        mental.put("tristeza", spinnerTristeza.getSelectedItemPosition() + 1);
+        mental.put("irritabilidad", spinnerIrritabilidad.getSelectedItemPosition() + 1);
+        mental.put("energia", spinnerEnergia.getSelectedItemPosition() + 1);
+        mental.put("felicidad", spinnerFelicidad.getSelectedItemPosition() + 1);
         mental.put("motivo", edtMotivoEmocion.getText().toString());
+
 
         // Actividad física
         Map<String, Object> fisica = new HashMap<>();
@@ -400,6 +397,16 @@ public class RegistroAvanzadoActivity extends AppCompatActivity {
         }
     }
 
+    private String getEmojiForValue(int valor) {
+        switch (valor) {
+            case 1: return "😭";
+            case 2: return "😔";
+            case 3: return "😐";
+            case 4: return "🙂";
+            case 5: return "😊";
+            default: return "";
+        }
+    }
     private void mostrarResumenDiario() {
         StringBuilder resumen = new StringBuilder("🌟 Resumen del día 🌟\n\n");
 
@@ -423,11 +430,11 @@ public class RegistroAvanzadoActivity extends AppCompatActivity {
 
         // Estado mental
         resumen.append("🧠 Estado Mental:\n");
-        resumen.append("- Ansiedad: ").append(getEmojiForRating(ratingAnsiedad.getRating())).append("\n");
-        resumen.append("- Tristeza: ").append(getEmojiForRating(ratingTristeza.getRating())).append("\n");
-        resumen.append("- Irritabilidad: ").append(getEmojiForRating(ratingIrritabilidad.getRating())).append("\n");
-        resumen.append("- Energía: ").append(getEmojiForRating(ratingEnergia.getRating())).append("\n");
-        resumen.append("- Felicidad: ").append(getEmojiForRating(ratingFelicidad.getRating())).append("\n");
+        resumen.append("- Ansiedad: ").append(spinnerAnsiedad.getSelectedItem().toString()).append(" ").append(getEmojiForValue(spinnerAnsiedad.getSelectedItemPosition() + 1)).append("\n");
+        resumen.append("- Tristeza: ").append(spinnerTristeza.getSelectedItem().toString()).append(" ").append(getEmojiForValue(spinnerTristeza.getSelectedItemPosition() + 1)).append("\n");
+        resumen.append("- Irritabilidad: ").append(spinnerIrritabilidad.getSelectedItem().toString()).append(" ").append(getEmojiForValue(spinnerIrritabilidad.getSelectedItemPosition() + 1)).append("\n");
+        resumen.append("- Energia: ").append(spinnerEnergia.getSelectedItem().toString()).append(" ").append(getEmojiForValue(spinnerEnergia.getSelectedItemPosition() + 1)).append("\n");
+        resumen.append("- Felicidad: ").append(spinnerFelicidad.getSelectedItem().toString()).append(" ").append(getEmojiForValue(spinnerFelicidad.getSelectedItemPosition() + 1)).append("\n");
 
         if (!edtMotivoEmocion.getText().toString().isEmpty()) {
             resumen.append("- Notas: ").append(edtMotivoEmocion.getText().toString()).append("\n");
@@ -501,6 +508,13 @@ public class RegistroAvanzadoActivity extends AppCompatActivity {
             return true;
         } else if (id == R.id.action_historial) {
             startActivity(new Intent(this, HistorialActivity.class));
+            return true;
+        }
+        if (item.getItemId() == android.R.id.home) {
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
             return true;
         }
 

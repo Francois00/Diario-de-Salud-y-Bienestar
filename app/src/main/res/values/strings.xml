@@ -28,6 +28,13 @@
     <string name="registro">Registro</string>
     <string name="registro_desc">Ir a registro diario</string>
 
+    <string-array name="numeros_1_a_5">
+        <item>1 (Mínimo)</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5 (Máximo)</item>
+    </string-array>
 
 
 
